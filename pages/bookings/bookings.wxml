@@ -1,0 +1,8 @@
+<view wx:for="{{bookings}}" wx:for-item="booking" wx:key="booking.id">
+  <view>{{booking.date}}</view>
+  <view>{{booking.startTime}} - {{booking.endTime}}</view>
+  <view>{{booking.duration}} hours</view>
+  <view>{{booking.price}} RMB</view>
+  <button>Edit Booking</button>
+  <button bindtap="deleteBooking" data-booking="{{booking.id}}">Delete booking</button>
+</view>

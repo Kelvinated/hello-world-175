@@ -1,0 +1,15 @@
+<form bindsubmit="bindSubmit">
+
+    <view>FIRST NAME</view>
+    <textarea value="{{first_name}}" placeholder="First name" class="form-blank" name="first_name"/>
+
+    <view>LAST NAME</view>
+    <textarea value="{{last_name}}" placeholder="Last name" class="form-blank" name="last_name"/>
+
+    <view>EMAIL</view>
+    <textarea value="{{email}}" placeholder="Email address" class="form-blank" name="email"/>
+
+    <view>PHONE NUMBER</view>
+    <textarea value="{{phone_number}}" placeholder="Phone number" class="form-blank" name="phone_number"/>
+
+  </form>

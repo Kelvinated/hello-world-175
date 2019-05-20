@@ -1,0 +1,1 @@
+<button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">LOGIN</button>

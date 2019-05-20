@@ -1,65 +1,86 @@
-
-let getBooks = (uid, cb) => {
+let addBooking = (ctx, cb) => {
   let tableId = getApp().globalData.tableId,
-    Books = new wx.BaaS.TableObject(tableId),
-    query = new wx.BaaS.Query()
-
-  query.compare('created_by', '=', uid)
-  Books.setQuery(query).find()
-    .then(res => cb(res))
-    .catch(err => console.dir(err))
-}
-
-let addBook = (ctx, cb) => {
-
-  let tableId = getApp().globalData.tableId,
-    Books = new wx.BaaS.TableObject(tableId),
-    Book = Books.create(),
-    bookName = ctx.data.creatingBookName
-
+    Bookings = new wx.BaaS.TableObject(tableId),
+    Booking = Bookings.create(),
+    date = ctx.data.date,
+    startTime = ctx.data.startTime,
+    endTime = ctx.data.endTime,
+    duration = ctx.data.duration,
+    price = ctx.data.price
   let data = {
-    bookName,
+    date,
+    startTime,
+    endTime,
+    duration,
+    price
   }
-
-  Book.set(data)
+  Booking.set(data)
     .save()
     .then(res => cb(res))
     .catch(err => console.dir(err))
-
 }
 
-let updateBook = (ctx, cb) => {
+let getBookings = (uid, cb) => {
   let tableId = getApp().globalData.tableId,
-    recordId = ctx.data.curRecordId,
-    bookName = ctx.data.editingBookName
+    Bookings = new wx.BaaS.TableObject(tableId),
+    query = new wx.BaaS.Query()
 
-  let Books = new wx.BaaS.TableObject(tableId),
-    Book = Books.getWithoutData(recordId)
-
-  let data = {
-    bookName
-  }
-
-  Book.set(data)
-    .update()
+  query.compare('created_by', '=', uid)
+  Bookings.setQuery(query).find()
     .then(res => cb(res))
     .catch(err => console.dir(err))
 }
 
-let deleteBook = (ctx, cb) => {
+let deleteBooking = (ctx, cb) => {
   let tableId = getApp().globalData.tableId,
     recordId = ctx.data.curRecordId
 
-  let Books = new wx.BaaS.TableObject(tableId)
+  let Bookings = new wx.BaaS.TableObject(tableId)
 
-  Books.delete(recordId)
+  Bookings.delete(recordId)
     .then(res => cb(res))
     .catch(err => console.dir(err))
 }
 
 module.exports = {
-  getBooks,
-  addBook,
-  updateBook,
-  deleteBook,
+  addBooking,
+  getBookings,
+  deleteBooking
 }
+
+
+// let updateBook = (ctx, cb) => {
+//   let tableId = getApp().globalData.tableId,
+//     recordId = ctx.data.curRecordId,
+//     bookName = ctx.data.editingBookName
+
+//   let Books = new wx.BaaS.TableObject(tableId),
+//     Book = Books.getWithoutData(recordId)
+
+//   let data = {
+//     bookName
+//   }
+
+//   Book.set(data)
+//     .update()
+//     .then(res => cb(res))
+//     .catch(err => console.dir(err))
+// }
+
+// let deleteBook = (ctx, cb) => {
+//   let tableId = getApp().globalData.tableId,
+//     recordId = ctx.data.curRecordId
+
+//   let Books = new wx.BaaS.TableObject(tableId)
+
+//   Books.delete(recordId)
+//     .then(res => cb(res))
+//     .catch(err => console.dir(err))
+// }
+
+// module.exports = {
+//   getBooks,
+//   addBook,
+//   updateBook,
+//   deleteBook,
+// }
