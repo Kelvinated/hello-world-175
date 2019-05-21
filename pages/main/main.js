@@ -3,18 +3,6 @@ let app = getApp()
 
 Page({
   data: {
-    timeArray: [
-      { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
-      { time: '10:00 - 11:00', active: "", available: "", clickable: "selectTime" },
-      { time: '11:00 - 12:00', active: "", available: "", clickable: "selectTime" },
-      { time: '12:00 - 13:00', active: "", available: "", clickable: "selectTime" },
-      { time: '13:00 - 14:00', active: "", available: "", clickable: "selectTime" },
-      { time: '14:00 - 15:00', active: "", available: "", clickable: "selectTime" },
-      { time: '15:00 - 16:00', active: "", available: "", clickable: "selectTime" },
-      { time: '16:00 - 17:00', active: "", available: "", clickable: "selectTime" },
-      { time: '17:00 - 18:00', active: "", available: "", clickable: "selectTime" }
-      ],
-      bookingArray: [],
       datePicked: false
   },
 
@@ -35,12 +23,28 @@ Page({
   },
 
   bindDateChange: function (e) {
+    // get user selected date
     const date = e.detail.value
     this.setData({
       date: date,
       datePicked: true
     })
-    // check for unavailable time slots on the selected date
+    // reset timeArray
+    this.setData({
+      timeArray: [
+        { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
+        { time: '10:00 - 11:00', active: "", available: "", clickable: "selectTime" },
+        { time: '11:00 - 12:00', active: "", available: "", clickable: "selectTime" },
+        { time: '12:00 - 13:00', active: "", available: "", clickable: "selectTime" },
+        { time: '13:00 - 14:00', active: "", available: "", clickable: "selectTime" },
+        { time: '14:00 - 15:00', active: "", available: "", clickable: "selectTime" },
+        { time: '15:00 - 16:00', active: "", available: "", clickable: "selectTime" },
+        { time: '16:00 - 17:00', active: "", available: "", clickable: "selectTime" },
+        { time: '17:00 - 18:00', active: "", available: "", clickable: "selectTime" }
+      ],
+      bookingArray: []
+    })
+    // create array of unavailable time slots on the selected date
     const unavailableObjectArray = this.data.unavailableObjectArray
     let unavailableArray = []
     unavailableObjectArray.forEach((object) => {
