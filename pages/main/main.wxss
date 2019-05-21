@@ -8,7 +8,14 @@
   background-size: contain;
   overflow: hidden;
 }
-
 .form-blank {
   height: 5vh
+}
+.buttonActive {
+  color: blue;
+  font-weight: bold;
+}
+.buttonUnavailable {
+  color: red;
+  font-style: italic;
 }

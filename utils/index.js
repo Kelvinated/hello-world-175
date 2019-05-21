@@ -3,12 +3,14 @@ let addBooking = (ctx, cb) => {
     Bookings = new wx.BaaS.TableObject(tableId),
     Booking = Bookings.create(),
     date = ctx.data.date,
-    startTime = ctx.data.startTime,
-    endTime = ctx.data.endTime,
+    bookingArray = ctx.data.bookingArray,
     duration = ctx.data.duration,
     price = ctx.data.price
+  let startTime = ((bookingArray[0]).split(" - "))[0],
+    endTime = ((bookingArray[bookingArray.length - 1]).split(" - "))[1]
   let data = {
     date,
+    bookingArray,
     startTime,
     endTime,
     duration,
