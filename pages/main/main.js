@@ -3,6 +3,7 @@ let app = getApp()
 
 Page({
   data: {
+    timeArray: ['09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00']
   },
 
   // onReady: function (options) {
@@ -51,7 +52,7 @@ Page({
     // }, err => {
     //   if (err.code === 607) {
     //     console.log('用户取消支付')
-    //   } else if (err.code === 608) {
+    //   } else if (err.code === 608) {wx.BaaS.storage.get('uid')
     //     console.log('支付失败', err.message)
     //   }
     // })
@@ -59,10 +60,8 @@ Page({
     utils.addBooking(this, (res) => {
       console.log(res)
     })
-  },
-
-  bindSubmit() {
-
+    wx.switchTab({
+      url: '../bookings/bookings',
+    })
   }
-
 })

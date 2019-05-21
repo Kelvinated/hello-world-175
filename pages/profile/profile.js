@@ -1,66 +1,84 @@
-// pages/profile/profile.js
-Page({
+import utils from '../../utils/index'
+const app = getApp()
 
-  /**
-   * Page initial data
-   */
+Page({
   data: {
 
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+  onLoad(options) {
+    // get CURRENT USER object
+    wx.BaaS.auth.getCurrentUser().then(user => {
+      this.setData({
+        user: user,
+        profile: user.get('phoneNumber') != null
+      })
+      if (user.get('phoneNumber') != null) {
+        this.setData({
+          firstName: user.get('firstName'),
+          lastName: user.get('lastName'),
+          phoneNumber: user.get('phoneNumber'),
+          email: user.get('_email')
+        })
+      }
 
+    }).catch(err => {
+        console.log(err)
+      if (err.code === 604) {
+        console.log('用户未登录')
+      }
+    })
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
+  updateProfile (e) {
+    this.setData({
+      errorMessage: null
+    })
 
-  },
+    // receive user input from form
+    const firstName = e.detail.value.firstName
+    const lastName = e.detail.value.lastName
+    const email = e.detail.value.email
+    const phoneNumber = e.detail.value.phoneNumber
 
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
+    let user = this.data.user
+    const regex = /^\d{11}$/
+    let errorMessage = this.data. errorMessage
 
-  },
+    // check phone number > check email address > 
+    if (regex.test(phoneNumber)) {
+      user.setEmail(email, { sendVerificationEmail: false }).then(user => {
+        console.log("Set email successful")
 
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
+        user.set('firstName', firstName).update().then(res => {
+          console.log("Set first name successful")
+        }).catch(err => {
+          console.log(err)
+        })
 
-  },
+        user.set('lastName', lastName).update().then(res => {
+          console.log("Set last name successful")
+        }).catch(err => {
+          console.log(err)
+        })
 
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
+        user.set('phoneNumber', phoneNumber).update().then(res => {
+          console.log("Set phone number successful")
+        }).catch(err => {
+          console.log(err)
+        })
 
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
+      }).catch(err => {
+        console.log("Error: email address invalid")
+        this.setData({
+          errorMessage: "Profile update failed. Please enter a valid email address."
+        })
+      })
+    } else {
+      console.log("Error: phone number invalid")
+      this.setData({
+        errorMessage: "Profile update failed. Please enter a valid phone number."
+      })
+    }
   }
 })

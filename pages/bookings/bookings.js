@@ -6,11 +6,12 @@ Page({
     bookings: []
   },
 
-  onLoad: function (options) {
+  onShow: function (options) {
     this.fetchBookings()
   },
 
   fetchBookings() {
+    console.log(wx.BaaS.storage.get('uid'))
     utils.getBookings(wx.BaaS.storage.get('uid'), (res) => {
       this.setData({
         bookings: res.data.objects

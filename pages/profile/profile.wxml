@@ -1,15 +1,33 @@
-<form bindsubmit="bindSubmit">
+<text style="font-size: 30px; font-weight: bold">MY PROFILE</text>
+<image src='{{user.avatar}}' class="index-profile__img"></image>
 
+<!-- COMPLETED PROFILE -->
+<view wx-if="{{profile}}">
+  <view>First name: {{firstName}}</view>
+  <view>Last name: {{lastName}}</view>
+  <view>Phone number: {{phoneNumber}}</view>
+  <view>Email: {{email}}</view>
+</view>
+
+<!-- FORM -->
+<view wx-if="{{!profile}}">
+  <view wx-if="{{errorMessage != null}}">
+    <text style="color: red; font-size: 20px;">{{errorMessage}}</text>
+  </view>
+
+  <form bindsubmit="updateProfile">
     <view>FIRST NAME</view>
-    <textarea value="{{first_name}}" placeholder="First name" class="form-blank" name="first_name"/>
+    <textarea value="{{firstName}}" placeholder="First name" class="form-blank" name="firstName"/>
 
     <view>LAST NAME</view>
-    <textarea value="{{last_name}}" placeholder="Last name" class="form-blank" name="last_name"/>
+    <textarea value="{{lastName}}" placeholder="Last name" class="form-blank" name="lastName"/>
+
+    <view>PHONE NUMBER</view>
+    <textarea value="{{phoneNumber}}" placeholder="Phone number" class="form-blank" name="phoneNumber"/>
 
     <view>EMAIL</view>
     <textarea value="{{email}}" placeholder="Email address" class="form-blank" name="email"/>
 
-    <view>PHONE NUMBER</view>
-    <textarea value="{{phone_number}}" placeholder="Phone number" class="form-blank" name="phone_number"/>
-
+    <button  form-type="submit">SUBMIT</button>
   </form>
+</view>

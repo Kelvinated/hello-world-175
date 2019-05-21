@@ -1,6 +1,3 @@
-<!-- <text>Name: {{user.nickname}}</text>
-<image src='{{user.avatar}}' class="index-profile__img"></image> -->
-
 <text style="font-size: 30px; font-weight: bold">MAKE A NEW BOOKING</text>
 
 <form bindsubmit="createBooking">
