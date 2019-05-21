@@ -3,38 +3,95 @@ let app = getApp()
 
 Page({
   data: {
-    timeArray: ['09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00']
+    timeArray: [
+      { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
+      { time: '10:00 - 11:00', active: "", available: "", clickable: "selectTime" },
+      { time: '11:00 - 12:00', active: "", available: "", clickable: "selectTime" },
+      { time: '12:00 - 13:00', active: "", available: "", clickable: "selectTime" },
+      { time: '13:00 - 14:00', active: "", available: "", clickable: "selectTime" },
+      { time: '14:00 - 15:00', active: "", available: "", clickable: "selectTime" },
+      { time: '15:00 - 16:00', active: "", available: "", clickable: "selectTime" },
+      { time: '16:00 - 17:00', active: "", available: "", clickable: "selectTime" },
+      { time: '17:00 - 18:00', active: "", available: "", clickable: "selectTime" }
+      ],
+      bookingArray: [],
+      datePicked: false
   },
 
-  // onReady: function (options) {
-  //   let page = this
-  //   wx.BaaS.auth.getCurrentUser().then((user) => {
-  //     page.setData({
-  //       user: user
-  //     })
-  //   })
-  // },
+  onLoad(options) {
+    // load all existing bookings
+    let tableId = getApp().globalData.tableId,
+      Bookings = new wx.BaaS.TableObject(tableId),
+      query = new wx.BaaS.Query()
+    Bookings.setQuery(query).find()
+      .then((res) =>
+        this.setData({
+          unavailableObjectArray: res.data.objects
+        })
+      )
+      .catch((err) =>
+      console.dir("Failed to load unavailable slots")
+      )
+  },
 
   bindDateChange: function (e) {
+    const date = e.detail.value
     this.setData({
-      date: e.detail.value
+      date: date,
+      datePicked: true
+    })
+    // check for unavailable time slots on the selected date
+    const unavailableObjectArray = this.data.unavailableObjectArray
+    let unavailableArray = []
+    unavailableObjectArray.forEach((object) => {
+      if (date === object.date.slice(0, 10)) {
+        unavailableArray.push(object.bookingArray)
+      };
+      unavailableArray = [].concat.apply([], unavailableArray);
+    });
+    // set hour button formatting for unavailable times
+    const timeArray = this.data.timeArray
+    for (var i = timeArray.length - 1; i >= 0; i--) {
+      if (unavailableArray.includes(timeArray[i].time)) {
+        timeArray[i].available = "buttonUnavailable";
+        timeArray[i].clickable = "";
+      }
+    };
+    this.setData({
+      timeArray: timeArray
     })
   },
 
-  bindStartTimeChange: function (e) {
+  selectTime: function (e) {
+    // build bookingArray
+    const bookingArray = this.data.bookingArray
+    const userSelection = e.currentTarget.dataset.hour.time
+    if (bookingArray.includes(userSelection)) {
+      bookingArray.splice(bookingArray.indexOf(userSelection), 1)
+    } else {
+    bookingArray.push(userSelection)
+    }
     this.setData({
-      startTime: e.detail.value
+      bookingArray: bookingArray.sort()
     })
-  },
+    console.log(this.data.bookingArray)
 
-  bindEndTimeChange: function (e) {
+    // set hour button formatting for selected times
+    const timeArray = this.data.timeArray
+    for (var i = timeArray.length - 1; i >= 0; i--) {
+      if (bookingArray.includes(timeArray[i].time)) {
+        timeArray[i].active = "buttonActive";
+      } else {
+        timeArray[i].active = "";
+      }
+    };
     this.setData({
-      endTime: e.detail.value
+      timeArray: timeArray
     })
-    const startTime = this.data.startTime
-    const endTime = this.data.endTime
-    const duration = parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0])
-    const price = Math.min(3, duration) * 65 + Math.max(0,(duration - 3))*130
+
+    // calculate duration
+    const duration = bookingArray.length
+    const price = Math.min(3, duration) * 65 + Math.max(0, (duration - 3)) * 130
     this.setData({
       duration: duration,
       price: price
