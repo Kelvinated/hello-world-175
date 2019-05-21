@@ -1,0 +1,14 @@
+.index-profile__img {
+  display: block;
+  border-radius: 50%;
+  width: 200rpx;
+  height: 200rpx;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+}
+
+.form-blank {
+  height: 5vh
+}

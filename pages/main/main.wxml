@@ -1,0 +1,23 @@
+<text style="font-size: 30px; font-weight: bold">MAKE A NEW BOOKING</text>
+
+<form bindsubmit="createBooking">
+
+    <picker mode="date" value="{{date}}" start="2019-04-19" end="2025-01-01" bindchange="bindDateChange" name="date">
+        <view>DATE {{date}}</view>
+    </picker>
+
+    <picker mode="time" value="{{time}}" start="05:00" end="22:00" bindchange="bindStartTimeChange" name="startTime">
+        <view>START {{startTime}}</view>
+    </picker>
+
+    <picker mode="time" value="{{time}}" start="05:00" end="22:00" bindchange="bindEndTimeChange" name="endTime">
+        <view>END {{endTime}}</view>
+    </picker>
+
+    <view>DURATION {{duration}} hours</view>
+
+    <view>PRICE {{price}} RMB</view>
+      
+    <button  form-type="submit">SUBMIT</button>
+
+</form>
