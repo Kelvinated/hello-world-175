@@ -29,7 +29,7 @@ Page({
       date: date,
       datePicked: true
     })
-    // reset timeArray
+    // reset timeArray + duration + price
     this.setData({
       timeArray: [
         { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
@@ -42,7 +42,9 @@ Page({
         { time: '16:00 - 17:00', active: "", available: "", clickable: "selectTime" },
         { time: '17:00 - 18:00', active: "", available: "", clickable: "selectTime" }
       ],
-      bookingArray: []
+      bookingArray: [],
+      duration: "",
+      price: ""
     })
     // create array of unavailable time slots on the selected date
     const unavailableObjectArray = this.data.unavailableObjectArray
