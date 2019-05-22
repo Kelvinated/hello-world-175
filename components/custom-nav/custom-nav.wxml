@@ -1,0 +1,13 @@
+ <view class="nav-outer-container">
+    <!-- <view class="outer-container" bindtap="goBack">
+      <view class="back-btn-container">
+        <image src="../../assets/left-arrow-white.png" mode="aspectFit"/>
+      </view>
+    </view> -->
+    <slot></slot>
+   <view class="profile-container">
+    <image mode="aspectFit" src="{{profilePic}}" />
+   </view>
+  <text style="color: {{titleColor}}">{{title}}</text>
+ </view>
+

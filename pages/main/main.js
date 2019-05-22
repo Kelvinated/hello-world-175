@@ -5,6 +5,12 @@ Page({
   data: {
   },
 
+  goBack: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
   onShow(options) {
     // load all existing bookings
     let tableId = getApp().globalData.tableId,

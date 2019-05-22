@@ -13,8 +13,8 @@ Page({
     }, (err) => {
       console.log(err)
     })
-    wx.switchTab({
-      url: '../main/main'
+    wx.navigateTo({
+      url: '../first/first'
     })
   }
 })

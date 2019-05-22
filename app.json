@@ -3,32 +3,16 @@
     "pages/login/login",
     "pages/main/main",
     "pages/bookings/bookings",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/first/first",
+    "pages/index/index",
+    "pages/faq/faq",
+    "pages/payment/payment",
+    "pages/review/review",
+    "pages/calendar/calendar"
   ],
-  "tabBar": {
-    "backgroundColor": "#920106",
-    "borderStyle": "black",
-    "selectedColor": "#FFFFFF",
-    "color": "#000000",
-    "list": [
-      {
-        "pagePath": "pages/bookings/bookings",
-        "text": "Bookings"
-      },
-      {
-        "pagePath": "pages/main/main",
-        "text": "Book"
-      },
-      {
-        "pagePath": "pages/profile/profile",
-        "text": "Profile"
-      }]
-  },
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Red Door Studio",
-    "navigationBarTextStyle": "black"
+    "navigationStyle": "custom"
   },
   "plugins": {
     "sdkPlugin": {

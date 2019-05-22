@@ -1,6 +1,18 @@
+<view class="navbar">
+  <CustomNav >
+    <view class='pair'>
+      <view>
+        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/back.png" />
+      </view>
+      <image id="logo" mode="aspectFit" src="/images/logo_white.png" />
+    </view>
+  </CustomNav>
+</view>
+
 <text style="font-size: 30px; font-weight: bold">MAKE A NEW BOOKING</text>
 
 <form bindsubmit="createBooking">
+
 
     <picker mode="date" value="{{date}}" start="2019-04-19" end="2025-01-01" bindchange="bindDateChange" name="date">
         <view>CHOOSE A DATE {{date}}</view>

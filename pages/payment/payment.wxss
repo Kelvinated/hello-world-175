@@ -1,17 +1,4 @@
-.form-blank {
-  height: 5vh
-}
-.index-profile__img {
-  display: block;
-  border-radius: 50%;
-  width: 200rpx;
-  height: 200rpx;
-  margin: 0 auto;
-  background-repeat: no-repeat;
-  background-size: contain;
-  overflow: hidden;
-}
-
+/* pages/payment/payment.wxss */
 .pair {
   display: flex;
   justify-items: center;
@@ -31,4 +18,8 @@
   margin-left:42%;
   width:56px;
   height:56px;
+}
+
+.banner{
+  padding: 5px;
 }

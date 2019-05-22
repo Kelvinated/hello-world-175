@@ -1,0 +1,64 @@
+/* pages/faq/faq.wxss */
+.list{
+  height: 30px;
+  line-height: 30px;
+  border-bottom:1px solid #E1E1E1;
+}
+.list-right{
+  float: right
+}
+.box{
+	height:0px;
+	overflow:hidden;
+}
+.classname{
+	border-bottom:1px solid #E1E1E1;
+	height: 40px;
+	line-height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.list-item{
+  height: auto;
+  line-height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom:1px solid #E1E1E1;
+  background: #f4f4f5;
+  font-size: 14px;
+}
+.classname .box{
+  height: 100px;
+}
+.listAction{
+  background: #FF0002;
+  border: none;
+}
+.listAuto{
+  height: auto;
+  transition: 3s;
+}
+
+
+.pair {
+  display: flex;
+  justify-items: center;
+}
+
+#back {
+  padding-left: 4vw;
+  padding-top: 7vh;
+  width:32px;
+  height:25px;
+}
+
+#logo{
+   margin:37px 0 0 19px;
+  position:absolute;
+  margin-top:9%;
+  margin-left:42%;
+  width:56px;
+  height:56px;
+}

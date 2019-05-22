@@ -6,6 +6,12 @@ Page({
 
   },
 
+  goBack: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
   onLoad(options) {
     // get CURRENT USER object
     wx.BaaS.auth.getCurrentUser().then(user => {
