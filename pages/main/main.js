@@ -3,10 +3,9 @@ let app = getApp()
 
 Page({
   data: {
-      datePicked: false
   },
 
-  onLoad(options) {
+  onShow(options) {
     // load all existing bookings
     let tableId = getApp().globalData.tableId,
       Bookings = new wx.BaaS.TableObject(tableId),
@@ -20,6 +19,11 @@ Page({
       .catch((err) =>
       console.dir("Failed to load unavailable slots")
       )
+    // reset form
+    this.setData({
+      datePicked: false,
+      date: ""
+    })
   },
 
   bindDateChange: function (e) {
@@ -29,7 +33,7 @@ Page({
       date: date,
       datePicked: true
     })
-    // reset timeArray
+    // reset timeArray + duration + price
     this.setData({
       timeArray: [
         { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
@@ -42,7 +46,9 @@ Page({
         { time: '16:00 - 17:00', active: "", available: "", clickable: "selectTime" },
         { time: '17:00 - 18:00', active: "", available: "", clickable: "selectTime" }
       ],
-      bookingArray: []
+      bookingArray: [],
+      duration: "",
+      price: ""
     })
     // create array of unavailable time slots on the selected date
     const unavailableObjectArray = this.data.unavailableObjectArray
