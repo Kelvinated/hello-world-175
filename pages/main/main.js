@@ -3,10 +3,9 @@ let app = getApp()
 
 Page({
   data: {
-      datePicked: false
   },
 
-  onLoad(options) {
+  onShow(options) {
     // load all existing bookings
     let tableId = getApp().globalData.tableId,
       Bookings = new wx.BaaS.TableObject(tableId),
@@ -20,6 +19,11 @@ Page({
       .catch((err) =>
       console.dir("Failed to load unavailable slots")
       )
+    // reset form
+    this.setData({
+      datePicked: false,
+      date: ""
+    })
   },
 
   bindDateChange: function (e) {
