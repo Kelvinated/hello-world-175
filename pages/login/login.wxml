@@ -1,1 +1,29 @@
-<button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">LOGIN</button>
+<!--pages/landing/landing.wxml-->
+<swiper indicator-dots="true" interval="{{interval}}" duration="{{duration}}">
+  <swiper-item>
+    <view class='pic'>
+      <image src='/images/mic.png'></image>
+    </view>
+    <view>
+      <text class="landing-text">让运动 与众不同</text>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='pic'>
+      <image src='/images/schedule.png'></image>
+    </view>
+    <view>
+      <text class="landing-text">相同的选择, 不同的期待</text>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='logo'>
+      <image src='/images/logo.jpg'></image>
+    </view>
+    <view class="userinfo">
+      <view class='container1'>
+        <button class='btn' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">LOGIN</button>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

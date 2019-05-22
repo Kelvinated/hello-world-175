@@ -5,6 +5,12 @@ Page({
   data: {
     bookings: []
   },
+  
+  goBack: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
 
   onShow: function (options) {
     this.fetchBookings()

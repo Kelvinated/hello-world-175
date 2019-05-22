@@ -1,3 +1,14 @@
+<view class="navbar">
+  <CustomNav >
+    <view class='pair'>
+      <view>
+        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/back.png" />
+      </view>
+      <image id="logo" mode="aspectFit" src="/images/logo_white.png" />
+    </view>
+  </CustomNav>
+</view>
+
 <view wx:for="{{bookings}}" wx:for-item="booking" wx:key="booking.id">
   <view>{{booking.date}}</view>
   <view>{{booking.startTime}} - {{booking.endTime}}</view>

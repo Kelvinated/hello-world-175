@@ -1,0 +1,76 @@
+page {
+  height: 100vh;
+}
+
+.faq {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  
+}
+
+.faq image {
+  width: 80px;
+  height: 58px;
+}
+
+.block {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.tap-bar {
+  align-content: flex-end;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10%;
+  padding-bottom: 10%;
+    bottom: 10vh;
+}
+
+.history image {
+  width: 170px;
+  height: 109px;
+}
+
+.profile image {
+  width: 170px;
+  height: 109px;
+}
+
+.info {
+  padding-top: 10%;
+  text-align: center;
+}
+
+.new-btn {
+  position: relative;
+  display: block;
+  width: 75%;
+  margin: 25px auto;
+  padding: 1px 10px;
+  border-radius: 50px;
+  box-shadow: 0 5px 0 0 #e9edee, 0 5px 0 2px #ccd2d2, 0 12px 20px 6px #d5dbdb;
+  text-align: center;
+  color: #FF0002;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.new-btn:active {
+  top: 5px;
+  box-shadow: 0 1px 0 2px #ccd2d2, 0 7px 20px 6px #d5dbdb;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+}
+
+.box-btn {
+  padding: 10px;
+}

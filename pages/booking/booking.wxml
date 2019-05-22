@@ -1,0 +1,61 @@
+<view class="navbar">
+  <CustomNav >
+    <view class='pair'>
+      <view>
+        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/back.png" />
+      </view>
+      <image id="logo" mode="aspectFit" src="/images/logo_white.png" />
+    </view>
+  </CustomNav>
+</view>
+
+<view class="banner">
+  <view>
+    <text>Please enter your infomation</text>
+  </view>
+</view>
+
+<view class="page-container">
+  <view class="box">
+    <form bindsubmit="bindSubmit">
+
+      <!-- FIRST NAME*** -->
+      <view class="section">
+        <view class="section__title">FIRST NAME</view>
+        <view class="text-area-wrap">
+          <textarea value="{{description}}" placeholder="John" class="" name="first_name"/>
+        </view>
+      </view>
+      <!-- LAST NAME*** -->
+      <view class="section">
+        <view class="section__title">LAST NAME</view>
+        <view class="text-area-wrap">
+          <textarea value="{{capacity}}" placeholder="Muir" name="last_name"/>
+        </view>
+      </view>
+     <!--EMAIL*** -->
+      <view class="section">
+        <view class="section__title">EMAIL</view>
+        <view class="text-area-wrap">
+          <textarea value="{{capacity}}" placeholder="rds@outlook.com" name="email"/>
+        </view>
+      </view>
+    <!--PHONE NUMBER*** -->
+      <view class="section">
+        <view class="section__title">PHONE</view>
+        <view class="text-area-wrap">
+          <textarea value="{{capacity}}" placeholder="000-1234-5678" name="phone"/>
+        </view>
+      </view>
+     <!--NATIONALITY*** -->
+      <view class="section">
+        <view class="section__title">NATIONALITY</view>
+        <view class="text-area-wrap">
+          <textarea value="{{capacity}}" placeholder="FRANCE" name="nationality"/>
+        </view>
+      </view>
+
+      <button  class="button-jittery" form-type="submit" loading="{{loading}}">NEXT</button>
+    </form>
+  </view>
+</view>

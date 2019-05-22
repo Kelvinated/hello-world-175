@@ -1,0 +1,34 @@
+<view class="navbar">
+  <CustomNav profilePic="/images/logo_white.png" />
+</view>
+
+
+<view class='top'>
+  <view class='faq'>
+    <image bindtap="bindFaq" src='/images/faq.png'></image>
+  </view>
+
+  <view class='box-btn'>
+    <button bindtap="bindBook" class='new-btn'>BOOK</button>
+  </view>
+</view>
+
+<view class='info'>
+  <text>9:00 am  -  6:00 pm
+¥ 65 / hour
+( If >= 3 hrs, ¥ 130 rmb/hr )</text>
+</view>
+
+<view class='block'>
+  <view class='tap-bar'>
+
+    <view class='history'>
+      <image bindtap="bindHistory" src='/images/calendar.png'></image>
+    </view>
+
+    <view class='profile'>
+      <image bindtap="bindProfile" src='/images/profile.png'></image>
+    </view>
+
+  </view>
+</view>
