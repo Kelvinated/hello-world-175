@@ -11,17 +11,17 @@ const week = [
 ]
 
 Component({
-  behaviors: [],
+  // behaviors: [],
 
   properties: {
-    show: {
-      type: Boolean,
-      value: false,
-    },
-    enableTime: {
-      type: Boolean,
-      value: false,
-    },
+    // show: {
+    //   type: Boolean,
+    //   value: false,
+    // },
+    // enableTime: {
+    //   type: Boolean,
+    //   value: false,
+    // },
     date: {
       type: String,
       value: '',
@@ -37,23 +37,23 @@ Component({
   },
 
   methods: {
-    formatTime(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
-      //author: meizz
-      var o = {
-        'M+': date.getMonth() + 1, //月份
-        'd+': date.getDate(), //日
-        'h+': date.getHours(), //小时
-        'm+': date.getMinutes(), //分
-        's+': date.getSeconds(), //秒
-        'q+': Math.floor((date.getMonth() + 3) / 3), //季度
-        S: date.getMilliseconds(), //毫秒
-      }
-      if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
-      for (var k in o)
-        if (new RegExp('(' + k + ')').test(fmt))
-          fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
-      return fmt
-    },
+    // formatTime(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
+    //   //author: meizz
+    //   var o = {
+    //     'M+': date.getMonth() + 1, //月份
+    //     'd+': date.getDate(), //日
+    //     // 'h+': date.getHours(), //小时
+    //     // 'm+': date.getMinutes(), //分
+    //     // 's+': date.getSeconds(), //秒
+    //     // 'q+': Math.floor((date.getMonth() + 3) / 3), //季度
+    //     // S: date.getMilliseconds(), //毫秒
+    //   }
+    //   // if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+    //   // for (var k in o)
+    //   //   if (new RegExp('(' + k + ')').test(fmt))
+    //   //     fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
+    //   // return fmt
+    // },
 
     goBack: function () {
       wx.navigateBack({
@@ -144,16 +144,18 @@ Component({
 
     handleSelectDate: function (e) {
       let data = e.target.dataset.selected
-      const selected = [data[0], data[1], data[2]]
-      this.setData({ selected })
-
-      let days = this.calDays(data[0], data[1])
+      data.forEach((num, index) => {
+        num = num.toString()
+        if (num.length < 2) {
+          num = ("0").concat(num);
+        };
+        data[index] = num
+      });
+      let date = data.join("-")
+      console.log(date)
       this.setData({
-        currYear: data[0],
-        currMonth: data[1],
-        days: days,
+        date: date
       })
-      console.log(this.data)
     },
 
     handleDatePickerChange(e) {
@@ -181,17 +183,17 @@ Component({
 
     init() {
       const { date } = this.data
-
       const dateTime = this.isDate(date) ? new Date(date) : today
 
       const year = dateTime.getFullYear()
       const month = dateTime.getMonth() + 1
       const dayInMonth = dateTime.getDate()
       const dayInWeek = dateTime.getDay()
-      const time = this.formatTime(dateTime, 'hh:mm')
+      // const time = this.formatTime(dateTime, 'hh:mm')
 
       const selected = [year, month, dayInMonth]
-      this.setData({ date: date, currYear: year, currMonth: month,  dayInMonth, week, time, selected })
+      // this.setData({ date: date, currYear: year, currMonth: month,  dayInMonth, week, time, selected })
+      this.setData({ date: date, currYear: year, currMonth: month, dayInMonth, week, selected })
       const emptyGrids = this.calEmptyGrid(year, month)
       const days = this.calDays(year, month)
       this.setData({ emptyGrids, days })
@@ -202,15 +204,15 @@ Component({
     //   this.init()
     // },
 
-    handleConfirm(e) {
-      console.log(this.data)
-      const { selected, enableTime } = this.data
-      if (selected && selected.length > 0) {
-        const dateStr = selected.join('/') + ' ' + this.data.time
-        const dateStr1 = this.formatTime(new Date(dateStr), enableTime ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd')
-        this.triggerEvent('onselectdate', { date: dateStr1 })
-      }
-    },
+    // handleConfirm(e) {
+    //   console.log(this.data)
+    //   const { selected, enableTime } = this.data
+    //   if (selected && selected.length > 0) {
+    //     const dateStr = selected.join('/') + ' ' + this.data.time
+    //     const dateStr1 = this.formatTime(new Date(dateStr), enableTime ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd')
+    //     this.triggerEvent('onselectdate', { date: dateStr1 })
+    //   }
+    // },
   },
 })
 
