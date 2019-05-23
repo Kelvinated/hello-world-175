@@ -1,7 +1,25 @@
 import utils from '../../utils/index'
 let app = getApp()
+const today = new Date()
+const week = [
+  { value: '周日', class: 'weekend' },
+  { value: '周一', class: '' },
+  { value: '周二', class: '' },
+  { value: '周三', class: '' },
+  { value: '周四', class: '' },
+  { value: '周五', class: '' },
+  { value: '周六', class: 'weekend' },
+]
 
 Page({
+  properties: {
+    date: {
+      type: String,
+      value: '',
+      observer: 'init',
+    }
+  },
+
   data: {
   },
 
@@ -23,7 +41,7 @@ Page({
         })
       )
       .catch((err) =>
-      console.dir("Failed to load unavailable slots")
+        console.dir("Failed to load unavailable slots")
       )
     // reset form
     this.setData({
@@ -32,15 +50,136 @@ Page({
     })
   },
 
-  bindDateChange: function (e) {
+  onReady(options) {
+    this.init()
+  },
+
+  init() {
+    const { date } = this.data
+    const dateTime = this.isDate(date) ? new Date(date) : today
+
+    const year = dateTime.getFullYear()
+    const month = dateTime.getMonth() + 1
+    const dayInMonth = dateTime.getDate()
+    const dayInWeek = dateTime.getDay()
+
+    const selected = [year, month, dayInMonth]
+    this.setData({ date: date, currYear: year, currMonth: month, dayInMonth, week, selected })
+    const emptyGrids = this.calEmptyGrid(year, month)
+    const days = this.calDays(year, month)
+    this.setData({ emptyGrids, days })
+  },
+
+// START OF CALENDAR
+  isDate(date) {
+    if (date == null || date == undefined) {
+      return false
+    }
+    return new Date(date).getDate() == date.substring(date.length - 2)
+  },
+
+  isLeapYear(y) {
+    return y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)
+  },
+
+  isToday(y, m, d) {
+    return y == today.getFullYear() && m == today.getMonth() + 1 && d == today.getDate()
+  },
+
+  isWeekend(emptyGrids, d) {
+    return (emptyGrids + d) % 7 == 0 || (emptyGrids + d - 1) % 7 == 0
+  },
+
+  calEmptyGrid(y, m) {
+    const result = new Date(`${y}/${m}/01 00:00:00`).getUTCDay()
+    return result + 1 || ''
+  },
+
+  calDaysInMonth(y, m) {
+    let leapYear = this.isLeapYear(y)
+    if (m == 2 && leapYear) {
+      return 29
+    }
+    if (m == 2 && !leapYear) {
+      return 28
+    }
+    if ([4, 6, 9, 11].includes(m)) {
+      return 30
+    }
+    return 31
+  },
+
+  calWeekDay(y, m, d) {
+    return new Date(`${y}/${m}/${d} 00:00:00`).getUTCDay() || ''
+  },
+
+  calDays(y, m) {
+    let { selected } = this.data
+    let emptyGrids = this.calEmptyGrid(y, m)
+    let days = []
+    for (let i = 1; i <= 31; i++) {
+      let ifToday = this.isToday(y, m, i)
+      let isSelected = selected[0] == y && selected[1] == m && selected[2] == i
+      let today = ifToday ? 'today' : ''
+      let select = isSelected ? 'selected' : ''
+      let weekend = this.isWeekend(emptyGrids, i) ? 'weekend' : ''
+      let todaySelected = ifToday && isSelected ? 'today-selected' : ''
+      let day = {
+        value: i,
+        class: `date-bg ${weekend} ${today} ${select} ${todaySelected}`,
+      }
+      days.push(day)
+    }
+    return days.slice(0, this.calDaysInMonth(y, m))
+  },
+
+  changeMonth: function (e) {
+    let id = e.currentTarget.dataset.id
+    let currYear = this.data.currYear
+    let currMonth = this.data.currMonth
+    currMonth = id == 'prev' ? currMonth - 1 : currMonth + 1
+    if (id == 'prev' && currMonth < 1) {
+      currYear -= 1
+      currMonth = 12
+    }
+    if (id == 'next' && currMonth > 12) {
+      currYear += 1
+      currMonth = 1
+    }
+
+    const emptyGrids = this.calEmptyGrid(currYear, currMonth)
+    const days = this.calDays(currYear, currMonth)
+    this.setData({ currYear, currMonth, emptyGrids, days })
+  },
+
+  // select month
+  handleDatePickerChange(e) {
+    let [year, month] = e.detail.value.split('-')
+    year = parseInt(year)
+    month = parseInt(month)
+    this.setData({ currYear: year, currMonth: month })
+    const emptyGrids = this.calEmptyGrid(year, month)
+    const days = this.calDays(year, month)
+    this.setData({ emptyGrids, days })
+    console.log(this.data)
+  },
+
+  handleSelectDate: function (e) {
     // get user selected date
-    const date = e.detail.value
+    let data = e.target.dataset.selected
+    data.forEach((num, index) => {
+      num = num.toString()
+      if (num.length < 2) {
+        num = ("0").concat(num);
+      };
+      data[index] = num
+    });
+    let date = data.join("-")
+    console.log(date)
     this.setData({
       date: date,
-      datePicked: true
-    })
+      datePicked: true,
     // reset timeArray + duration + price
-    this.setData({
       timeArray: [
         { time: '09:00 - 10:00', active: "", available: "", clickable: "selectTime" },
         { time: '10:00 - 11:00', active: "", available: "", clickable: "selectTime" },
@@ -77,6 +216,7 @@ Page({
       timeArray: timeArray
     })
   },
+// END OF CALENDAR
 
   selectTime: function (e) {
     // build bookingArray

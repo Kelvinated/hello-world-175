@@ -36,7 +36,7 @@
     </view>
   </view>
 
-  <view class="actions" style="display:flex;box-sizing: border-box; padding:12rpx 24rpx;">
+  <!-- <view class="actions" style="display:flex;box-sizing: border-box; padding:12rpx 24rpx;">
     <picker mode="time" bindchange="handleTimePickerChange" value="{{time}}">
       <view class="" style="display:{{enableTime ? 'flex' : 'none'}};flex:1;font-size:24rpx;align-items:center">
         时间 <input value="{{time||'00:00'}}" disabled style="margin-left:12rpx;width:80rpx;padding:0rpx 12rpx;border:1px solid #e5e5e5;"/>
@@ -47,5 +47,5 @@
       <button bindtap="handleChooseToday" style="margin:0;padding-left:20rpx;padding-right:20rpx;margin-left:24rpx;" size="mini" type="default">今天</button>
       <button disabled="{{!selected||selected.length<3}}" bindtap="handleConfirm" style="margin:0;padding-left:20rpx;padding-right:20rpx;margin-left:24rpx;" size="mini" type="warn">确定</button>
     </view>
-  </view>
+  </view> -->
 </view>
