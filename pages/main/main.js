@@ -54,22 +54,6 @@ Page({
     this.init()
   },
 
-  init() {
-    const { date } = this.data
-    const dateTime = this.isDate(date) ? new Date(date) : today
-
-    const year = dateTime.getFullYear()
-    const month = dateTime.getMonth() + 1
-    const dayInMonth = dateTime.getDate()
-    const dayInWeek = dateTime.getDay()
-
-    const selected = [year, month, dayInMonth]
-    this.setData({ date: date, currYear: year, currMonth: month, dayInMonth, week, selected })
-    const emptyGrids = this.calEmptyGrid(year, month)
-    const days = this.calDays(year, month)
-    this.setData({ emptyGrids, days })
-  },
-
 // START OF CALENDAR
   isDate(date) {
     if (date == null || date == undefined) {
@@ -161,12 +145,12 @@ Page({
     const emptyGrids = this.calEmptyGrid(year, month)
     const days = this.calDays(year, month)
     this.setData({ emptyGrids, days })
-    console.log(this.data)
   },
 
   handleSelectDate: function (e) {
     // get user selected date
     let data = e.target.dataset.selected
+    let selected = data[2]
     data.forEach((num, index) => {
       num = num.toString()
       if (num.length < 2) {
@@ -175,8 +159,8 @@ Page({
       data[index] = num
     });
     let date = data.join("-")
-    console.log(date)
     this.setData({
+      selected: selected,
       date: date,
       datePicked: true,
     // reset timeArray + duration + price
@@ -230,7 +214,6 @@ Page({
     this.setData({
       bookingArray: bookingArray.sort()
     })
-    console.log(this.data.bookingArray)
 
     // set hour button formatting for selected times
     const timeArray = this.data.timeArray
@@ -276,5 +259,21 @@ Page({
     wx.switchTab({
       url: '../bookings/bookings',
     })
+  },
+
+  init() {
+    const { date } = this.data
+    const dateTime = this.isDate(date) ? new Date(date) : today
+
+    const year = dateTime.getFullYear()
+    const month = dateTime.getMonth() + 1
+    const dayInMonth = dateTime.getDate()
+    const dayInWeek = dateTime.getDay()
+
+    const selected = [year, month, dayInMonth]
+    this.setData({ date: date, currYear: year, currMonth: month, dayInMonth, week, selected })
+    const emptyGrids = this.calEmptyGrid(year, month)
+    const days = this.calDays(year, month)
+    this.setData({ emptyGrids, days })
   }
 })
