@@ -3,7 +3,8 @@ let app = getApp()
 
 Page({
   data: {
-    bookings: []
+    bookings: [],
+    editMode: false
   },
   
   goBack: function () {
@@ -17,7 +18,6 @@ Page({
   },
 
   fetchBookings() {
-    console.log(wx.BaaS.storage.get('uid'))
     utils.getBookings(wx.BaaS.storage.get('uid'), (res) => {
       this.setData({
         bookings: res.data.objects
@@ -33,5 +33,18 @@ Page({
       this.fetchBookings()
       this.setData({ curRecordId: '' })
     })
+  },
+
+  toUpdate(e) {
+    this.setData({
+      curRecordId: e.target.dataset.booking,
+    })
+    wx.navigateTo({
+      url: '../update/update?id=' + this.data.curRecordId
+    })
+    // utils.updateBooking(this, (res) => {
+    //   this.fetchBookings()
+    //   this.setData({ curRecordId: '' })
+    // })
   }
 })

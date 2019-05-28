@@ -27,7 +27,6 @@ Page({
           email: user.get('_email')
         })
       }
-
     }).catch(err => {
         console.log(err)
       if (err.code === 604) {

@@ -20,6 +20,13 @@
   font-style: italic;
 }
 
+.time-button {
+  font-size: 14px;
+  width: 25vw;
+  padding: 0;
+  margin: 5px;
+}
+
 .pair {
   display: flex;
   justify-items: center;
