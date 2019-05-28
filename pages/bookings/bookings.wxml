@@ -9,11 +9,14 @@
   </CustomNav>
 </view>
 
+<view style="font-size: 30px; font-weight: bold">My bookings</view>
+<view style="margin-bottom:25px;">@Jeff/Paul - should display bookings ordered by date (first upcoming date at the top) and separate active and past bookings</view>
+
 <view wx:for="{{bookings}}" wx:for-item="booking" wx:key="booking.id">
   <view>{{booking.date}}</view>
   <view>{{booking.startTime}} - {{booking.endTime}}</view>
   <view>{{booking.duration}} hours</view>
   <view>{{booking.price}} RMB</view>
-  <button>Edit Booking</button>
+  <button bindtap="toUpdate" data-booking="{{booking.id}}">Edit Booking</button>
   <button bindtap="deleteBooking" data-booking="{{booking.id}}">Delete booking</button>
 </view>

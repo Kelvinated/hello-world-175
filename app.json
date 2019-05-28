@@ -9,7 +9,7 @@
     "pages/faq/faq",
     "pages/payment/payment",
     "pages/review/review",
-    "pages/calendar/calendar"
+    "pages/update/update"
   ],
   "window": {
     "navigationStyle": "custom"
