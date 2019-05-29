@@ -46,15 +46,17 @@ let deleteBooking = (ctx, cb) => {
 
 let updateBooking = (ctx, cb) => {
   let tableId = getApp().globalData.tableId,
-  recordId = ctx.data.curRecordId
-  bookingArray = x
-  startTime = x
-  endTime = x
+  recordId = ctx.data.curRecordId,
+  date = ctx.data.date,
+  bookingArray = ctx.data.bookingArray
+  let startTime = ((bookingArray[0]).split(" - "))[0],
+    endTime = ((bookingArray[bookingArray.length - 1]).split(" - "))[1]
 
-  let Bookings = new wx.BaaS.TableObject(tableId)
+  let Bookings = new wx.BaaS.TableObject(tableId),
   Booking = Bookings.getWithoutData(recordId)
 
   let data = {
+    date,
     bookingArray,
     startTime,
     endTime
@@ -62,6 +64,17 @@ let updateBooking = (ctx, cb) => {
 
   Booking.set(data)
     .update()
+    .then(res => cb(res))
+    .catch(err => console.dir(err))
+}
+
+let showBooking = (id, cb) => {
+  let tableId = getApp().globalData.tableId,
+    Bookings = new wx.BaaS.TableObject(tableId),
+    query = new wx.BaaS.Query()
+
+  query.compare('id', '=', id)
+  Bookings.setQuery(query).find()
     .then(res => cb(res))
     .catch(err => console.dir(err))
 }
@@ -89,6 +102,7 @@ module.exports = {
   addBooking,
   getBookings,
   deleteBooking,
-  updateBooking
+  updateBooking,
+  showBooking
   // updateProfile
 }
