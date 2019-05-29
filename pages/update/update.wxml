@@ -1,2 +1,60 @@
-<!--pages/update/update.wxml-->
-<text>pages/update/update.wxml</text>
+<view class="navbar">
+  <CustomNav>
+    <view class='pair'>
+      <view>
+        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/back.png" />
+      </view>
+      <image id="logo" mode="aspectFit" src="/images/logo_white.png" />
+    </view>
+  </CustomNav>
+</view>
+
+<form bindsubmit="updateBooking">
+  <view style="font-size: 30px; font-weight: bold">Update your time</view>
+  <view>Click on a date to view available time slots</view>
+  <view style="color:orange">@Jeff/Paul - this page should by default show the unchanged booking selected date and time slots</view>
+  <view style="color:orange">@Jeff/Paul - should let users select times that include times in the current booking</view>
+  <view style="color:orange">@Jeff/Paul - should show users the number of hours they have paid for and only let them click on update when they have selected the same total number of hours</view>
+  <!-- year/month header picker -->
+  <view class="date-display flex">
+    <!-- previous month arrow -->
+    <view class="next-prev" bindtap="changeMonth" data-id="prev">
+      <view class="arrow prev"></view>
+    </view>
+    <!-- select year/month -->
+    <picker style="flex:6;width:100%" value="{{currYear+'-'+currMonth}}" fields="month" mode="date" bindchange="handleDatePickerChange">
+      <view class="selected-date" style="display:flex;align-items:center;justify-content:center">
+        <view>{{currYear}}年{{currMonth}}月</view>
+        <view class="arrow down" /></view>
+    </picker>
+    <!-- next month arrow -->
+    <view class="next-prev" bindtap="changeMonth" data-id="next">
+      <view class="arrow next"></view>
+    </view>
+  </view>
+  <!-- weeks -->
+  <view class="week-display flex">
+    <view wx:key="{{index}}" wx:for="{{week}}" class="week-cell {{item.class}}">{{item.value}}</view>
+  </view>
+  <!-- dates -->
+  <view class="date-picker">
+    <view class="flex">
+      <view wx:key="{{index}}" wx:for="{{emptyGrids}}" class="date-cell"></view>
+      <view wx:key="{{index}}" wx:for="{{days}}" class="date-cell" bindtap="handleSelectDate" data-selected="{{[currYear, currMonth, item.value]}}">
+        <view class="{{item.class}}{{selected == item.value ? ' selected': ''}}" data-selected="{{[currYear, currMonth, item.value]}}">{{item.value}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- time slots -->
+  <view wx-if="{{datePicked}}">
+    <view>Select an available time slot on {{date}}</view>
+    <view style="display:flex; flex-wrap:wrap;">
+      <view wx:for="{{timeArray}}" wx:for-item="hour" wx:key="hour">
+        <button bindtap="{{hour.clickable}}" data-hour="{{hour}}" class="time-button {{hour.active}} {{hour.available}}">{{hour.time}}</button>
+      </view>
+    </view>
+    <view>DURATION {{duration}} hours</view>
+    <view>PRICE {{price}} RMB</view>
+  </view>
+  <button  form-type="submit">Update booking</button>
+</form>

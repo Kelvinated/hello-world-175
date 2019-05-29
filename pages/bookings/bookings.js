@@ -3,8 +3,7 @@ let app = getApp()
 
 Page({
   data: {
-    bookings: [],
-    editMode: false
+    bookings: []
   },
   
   goBack: function () {

@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "CustomNav": "../../../components/custom-nav/custom-nav"
+  }
 }

@@ -108,10 +108,10 @@
   <!-- STEP 3 -->
   <view wx-if="{{stepThree}}">
     <view style="font-size: 30px; font-weight: bold">STEP 3: Submit payment</view>
-    <view>@Kelvin - put in your payment stuff here</view>
-    <view>@Jeff/Paul - put in booking review on this page?</view>
-    <view>@Jeff/Paul - for steps 2 and 3 we should remove the back button on the top?</view>
-    <view>@Jeff/Paul - suggestion given there are multiple steps, we could put in a little tracker thing at the top to show users that they are at step 1, step 2, step 3</view>
+    <view style="color:orange">@Kelvin - put in your payment stuff here</view>
+    <view style="color:orange">@Jeff/Paul - put in booking review on this page?</view>
+    <view style="color:orange">@Jeff/Paul - for steps 2 and 3 we should remove the back button on the top?</view>
+    <view style="color:orange">@Jeff/Paul - suggestion given there are multiple steps, we could put in a little tracker thing at the top to show users that they are at step 1, step 2, step 3</view>
     <button  form-type="submit">Confirm booking</button>
   </view>
 </form>
