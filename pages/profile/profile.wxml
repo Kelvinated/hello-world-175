@@ -14,19 +14,23 @@
 
 <!-- COMPLETED PROFILE -->
 <view wx-if="{{profile}}">
-  <view>First name: {{firstName}}</view>
-  <view>Last name: {{lastName}}</view>
-  <view>Phone number: {{phoneNumber}}</view>
-  <view>Email: {{email}}</view>
+  <view wx-if="{{!editing}}">
+    <view>First name: {{firstName}}</view>
+    <view>Last name: {{lastName}}</view>
+    <view>Phone number: {{phoneNumber}}</view>
+    <view>Email: {{email}}</view>
+    <button bindtap="toEdit">Edit</button>
+  </view>
+
 </view>
 
 <!-- FORM -->
-<view wx-if="{{!profile}}">
+<view wx-if="{{!profile || editing}}">
   <view wx-if="{{errorMessage != null}}">
     <text style="color: red; font-size: 20px;">{{errorMessage}}</text>
   </view>
 
-  <form bindsubmit="updateProfile">
+  <form bindsubmit="setProfile">
     <view>FIRST NAME</view>
     <textarea value="{{firstName}}" placeholder="First name" class="form-blank" name="firstName"/>
 

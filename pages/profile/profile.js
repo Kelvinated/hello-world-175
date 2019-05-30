@@ -3,7 +3,7 @@ const app = getApp()
 
 Page({
   data: {
-
+    editing: false
   },
 
   goBack: function () {
@@ -35,7 +35,7 @@ Page({
     })
   },
 
-  updateProfile (e) {
+  setProfile (e) {
     this.setData({
       errorMessage: null
     })
@@ -73,6 +73,10 @@ Page({
           console.log(err)
         })
 
+        wx.reLaunch({
+          url: '../profile/profile',
+        })
+
       }).catch(err => {
         console.log("Error: email address invalid")
         this.setData({
@@ -85,5 +89,11 @@ Page({
         errorMessage: "Profile update failed. Please enter a valid phone number."
       })
     }
+  },
+
+  toEdit() {
+    this.setData({
+      editing: true
+    })
   }
 })

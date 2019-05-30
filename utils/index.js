@@ -79,30 +79,10 @@ let showBooking = (id, cb) => {
     .catch(err => console.dir(err))
 }
 
-
-// let updateProfile = (ctx, cb) => {
-//   let tableName = '_userprofile',
-//     recordId = ctx.data.curRecordId,
-//     firstName = ctx.data.firstName
-
-//   let Users = new wx.BaaS.TableObject(tableName),
-//     User = Users.getWithoutData(recordId)
-
-//   let data = {
-//     firstName
-//   }
-
-//   User.set(data)
-//     .update()
-//     .then(res => cb(res))
-//     .catch(err => console.dir(err))
-// }
-
 module.exports = {
   addBooking,
   getBookings,
   deleteBooking,
   updateBooking,
   showBooking
-  // updateProfile
 }
