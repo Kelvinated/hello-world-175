@@ -16,9 +16,9 @@
     <view class='dotbar'>
       <view>
         <ul class="progressbar">
-          <li class="active">Select your time</li>
-          <li>Confirm your profile details</li>
-          <li>Submit payment</li>
+            <li class="active">Select your time</li>
+            <li >Confirm your profile details</li>
+            <li>Submit payment</li>
         </ul>
       </view>
       <view>Click on a date to view available time slots</view>
@@ -70,12 +70,12 @@
 
   <!-- STEP 2 -->
   <view wx-if="{{stepTwo}}">
-    <view class='dotbar'>
+<view class='dotbar'>
       <view>
         <ul class="progressbar">
-          <li class="active">Select your time</li>
-          <li class="active">Confirm your profile details</li>
-          <li>Submit payment</li>
+            <li class="active">Select your time</li>
+            <li class="active">Confirm your profile details</li>
+            <li>Submit payment</li>
         </ul>
       </view>
       <view>Please click on Edit to make any changes</view>
@@ -83,65 +83,64 @@
 
     <!-- COMPLETED PROFILE -->
     <view wx-if="{{profile}}">
-      <view wx-if="{{!editing}}">
+        <view wx-if="{{!editing}}">
         <view>First name: {{firstName}}</view>
         <view>Last name: {{lastName}}</view>
         <view>Phone number: {{phoneNumber}}</view>
         <view>Email: {{email}}</view>
         <button bindtap="toEdit">Edit</button>
-        <view style="display:flex">
+        <view style="display:flex">  
           <button bindtap="toStepOne">Back to Step One</button>
           <button bindtap="toStepThree">Proceed to Step Three</button>
-        </view>
-      </view>
-
-      <!-- FORM -->
-      <view wx-if="{{!profile || editing}}">
-        <view wx-if="{{errorMessage != null}}">
-          <text style="color: red; font-size: 20px;">{{errorMessage}}</text>
-        </view>
-
-        <form bindsubmit="setProfile">
-          <view>FIRST NAME</view>
-          <textarea value="{{firstName}}" placeholder="First name" class="form-blank" name="firstName" />
-
-          <view>LAST NAME</view>
-          <textarea value="{{lastName}}" placeholder="Last name" class="form-blank" name="lastName" />
-
-          <view>PHONE NUMBER</view>
-          <textarea value="{{phoneNumber}}" placeholder="Phone number" class="form-blank" name="phoneNumber" />
-
-          <view>EMAIL</view>
-          <textarea value="{{email}}" placeholder="Email address" class="form-blank" name="email" />
-
-          <view style="display:flex">
-            <button bindtap="toStepOne">Back to Step One</button>
-            <button form-type="submit" bindtap="toStepThree">Proceed to Step Three</button>
-          </view>
-        </form>
       </view>
     </view>
 
-    <!-- STEP 3 -->
-    <view wx-if="{{stepThree}}">
+    <!-- FORM -->
+    <view wx-if="{{!profile || editing}}">
+      <view wx-if="{{errorMessage != null}}">
+        <text style="color: red; font-size: 20px;">{{errorMessage}}</text>
+      </view>
 
-      <view class='dotbar'>
-        <view>
-          <ul class="progressbar">
+      <form bindsubmit="setProfile">
+        <view>FIRST NAME</view>
+        <textarea value="{{firstName}}" placeholder="First name" class="form-blank" name="firstName"/>
+
+        <view>LAST NAME</view>
+        <textarea value="{{lastName}}" placeholder="Last name" class="form-blank" name="lastName"/>
+
+        <view>PHONE NUMBER</view>
+        <textarea value="{{phoneNumber}}" placeholder="Phone number" class="form-blank" name="phoneNumber"/>
+
+        <view>EMAIL</view>
+        <textarea value="{{email}}" placeholder="Email address" class="form-blank" name="email"/>
+
+        <view style="display:flex">  
+          <button bindtap="toStepOne">Back to Step One</button>
+          <button form-type="submit" bindtap="toStepThree">Proceed to Step Three</button>
+        </view>
+      </form>
+    </view>
+  </view>
+
+  <!-- STEP 3 -->
+  <view wx-if="{{stepThree}}">
+
+   <view class='dotbar'>
+      <view>
+        <ul class="progressbar">
             <li class="active">Select your time</li>
             <li class="active">Confirm your profile details</li>
             <li class="active">Submit payment</li>
-          </ul>
-        </view>
-        <view></view>
+        </ul>
       </view>
-
-
-      <view style="color:orange">@Kelvin - put in your payment stuff here</view>
-      <view style="color:orange">@Jeff/Paul - put in booking review on this page?</view>
-      <view style="color:orange">@Jeff/Paul - for steps 2 and 3 we should remove the back button on the top?</view>
-      <view style="color:orange">@Jeff/Paul - suggestion given there are multiple steps, we could put in a little tracker thing at the top to show users that they are at step 1, step 2, step 3</view>
-      <button form-type="submit">Confirm booking</button>
+      <view></view>
     </view>
+
+
+    <view style="color:orange">@Kelvin - put in your payment stuff here</view>
+    <view style="color:orange">@Jeff/Paul - put in booking review on this page?</view>
+    <view style="color:orange">@Jeff/Paul - for steps 2 and 3 we should remove the back button on the top?</view>
+    <view style="color:orange">@Jeff/Paul - suggestion given there are multiple steps, we could put in a little tracker thing at the top to show users that they are at step 1, step 2, step 3</view>
+    <button  form-type="submit">Confirm booking</button>
   </view>
 </form>
