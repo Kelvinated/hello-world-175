@@ -13,16 +13,8 @@
 
   <!-- STEP 1 -->
   <view wx-if="{{stepOne}}">
-    <view class='dotbar'>
-      <view>
-        <ul class="progressbar">
-            <li class="active">Select your time</li>
-            <li >Confirm your profile details</li>
-            <li>Submit payment</li>
-        </ul>
-      </view>
-      <view>Click on a date to view available time slots</view>
-    </view>
+    <view style="font-size: 30px; font-weight: bold">STEP 1: Select your time</view>
+    <view>Click on a date to view available time slots</view>
     <!-- year/month header picker -->
     <view class="date-display flex">
       <!-- previous month arrow -->
@@ -70,19 +62,11 @@
 
   <!-- STEP 2 -->
   <view wx-if="{{stepTwo}}">
-<view class='dotbar'>
-      <view>
-        <ul class="progressbar">
-            <li class="active">Select your time</li>
-            <li class="active">Confirm your profile details</li>
-            <li>Submit payment</li>
-        </ul>
-      </view>
-      <view>Please click on Edit to make any changes</view>
-    </view>
 
     <!-- COMPLETED PROFILE -->
     <view wx-if="{{profile}}">
+      <view style="font-size: 30px; font-weight: bold">STEP 2: Confirm your profile details</view>
+      <view>Please click on Edit to make any changes</view>
         <view wx-if="{{!editing}}">
         <view>First name: {{firstName}}</view>
         <view>Last name: {{lastName}}</view>
@@ -92,6 +76,7 @@
         <view style="display:flex">  
           <button bindtap="toStepOne">Back to Step One</button>
           <button bindtap="toStepThree">Proceed to Step Three</button>
+        </view>
       </view>
     </view>
 
@@ -124,19 +109,7 @@
 
   <!-- STEP 3 -->
   <view wx-if="{{stepThree}}">
-
-   <view class='dotbar'>
-      <view>
-        <ul class="progressbar">
-            <li class="active">Select your time</li>
-            <li class="active">Confirm your profile details</li>
-            <li class="active">Submit payment</li>
-        </ul>
-      </view>
-      <view></view>
-    </view>
-
-
+    <view style="font-size: 30px; font-weight: bold">STEP 3: Submit payment</view>
     <view style="color:orange">@Kelvin - put in your payment stuff here</view>
     <view style="color:orange">@Jeff/Paul - put in booking review on this page?</view>
     <view style="color:orange">@Jeff/Paul - for steps 2 and 3 we should remove the back button on the top?</view>
