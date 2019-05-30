@@ -2,7 +2,7 @@
   <CustomNav>
     <view class='pair'>
       <view>
-        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/back.png" />
+        <image bindtap="goBack" id='back' mode="aspectFit" src="/images/home.png" />
       </view>
       <image id="logo" mode="aspectFit" src="/images/logo_white.png" />
     </view>
@@ -13,7 +13,7 @@
 
   <!-- STEP 1 -->
   <view wx-if="{{stepOne}}">
-
+  <button  bindtap="goBack">Go back</button>
   <view class='dotbar'>
       <view>
         <ul class="progressbar">
@@ -84,7 +84,7 @@
     </view>
 
     <!-- COMPLETED PROFILE -->
-    <view wx-if="{{profile}}">
+    <view class='wrapper' wx-if="{{profile}}">
         <view wx-if="{{!editing}}">
         <view>First name: {{firstName}}</view>
         <view>Last name: {{lastName}}</view>
@@ -104,7 +104,7 @@
         <text style="color: red; font-size: 20px;">{{errorMessage}}</text>
       </view>
 
-      <form bindsubmit="setProfile">
+      <form class='wrapper' bindsubmit="setProfile">
         <view>FIRST NAME</view>
         <textarea value="{{firstName}}" placeholder="First name" class="form-blank" name="firstName"/>
 
