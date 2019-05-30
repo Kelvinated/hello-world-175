@@ -23,7 +23,8 @@ Page({
   data: {
     stepOne: true,
     stepTwo: false,
-    stepThree: false
+    stepThree: false,
+    editing: false
   },
 
   goBack: function () {
@@ -263,7 +264,7 @@ Page({
     })
   },
 
-  updateProfile(e) {
+  setProfile(e) {
     this.setData({
       errorMessage: null
     })
@@ -369,6 +370,12 @@ Page({
     })
     wx.navigateTo({
       url: '../bookings/bookings',
+    })
+  },
+
+  toEdit() {
+    this.setData({
+      editing: true
     })
   },
 
