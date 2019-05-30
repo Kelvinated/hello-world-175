@@ -16,12 +16,11 @@
 <view wx-if="{{profile}}">
   <view wx-if="{{!editing}}">
     <view>First name: {{firstName}}</view>
-    <view>Last name: {{lastName}}</view>
+    <view>Last name: {{lastName}}</view> // updateProfile
     <view>Phone number: {{phoneNumber}}</view>
     <view>Email: {{email}}</view>
     <button bindtap="toEdit">Edit</button>
   </view>
-
 </view>
 
 <!-- FORM -->
